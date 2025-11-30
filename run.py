@@ -1,6 +1,7 @@
 import asyncio
 import os
 from dotenv import load_dotenv
+import agentops
 
 from google.adk.sessions import InMemorySessionService
 from google.adk.runners import Runner
@@ -14,6 +15,10 @@ from agents import watchdog_agent, investigation_swarm, remediation_agent
 load_dotenv()
 
 async def main():
+    agentops.init(
+        api_key=os.getenv("AGENTOPS_API_KEY"),
+        tags=["opsshield"]
+    )
     print("🛡️  OpsShield System Initializing...")
 
     session_service = InMemorySessionService()
